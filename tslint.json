@@ -1,6 +1,9 @@
 {
-  "extends": "tslint:recommended",
-  "rules": {
+  "extends": [
+    "tslint:latest",
+    "tslint-config-prettier"
+  ],
+    "rules": {
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {

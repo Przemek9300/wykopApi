@@ -1,0 +1,26 @@
+.fixed{
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    background-color: #121212;
+
+}
+.responsive {
+    background-color: #121212;
+    width: auto;
+    max-width: 800px;
+    height: auto;
+    cursor: pointer;
+}
+.grid {
+    display: grid;
+    margin-top: 100px;
+    align-items: center;
+    justify-items: center; /* adjusted */
+  }
+.grid-item{
+    
+}
+li{
+    list-style-type: none;
+}
