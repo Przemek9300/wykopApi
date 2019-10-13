@@ -1,27 +1,10 @@
 <div class="search-results grid" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50"
   (scrolled)="onScroll()">
-  <li *ngFor="let post of data | async | sortBy : sort ">
-    <mat-divider></mat-divider>
+  <li *ngFor="let post of data  | sortBy : sort ">
 
-    <ng-container *ngIf="post?.embed?.type === 'image'">
-      <mat-card class="card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>{{post.author.login}}</mat-card-title>
-          <mat-card-subtitle><mat-icon matBadge="{{post.vote_count}}" matBadgeColor="warn">plus</mat-icon></mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="{{ post?.embed?.url }}" alt="Photo of a Shiba Inu">
-        <mat-card-content>
-          <p>
-            {{post.body}}
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
-    </ng-container>
+    <app-mikroblog-post [post]=post></app-mikroblog-post>
 
   </li>
+<app-mikroblog-post-not-found></app-mikroblog-post-not-found>
+
 </div>

@@ -24,6 +24,12 @@ export class SortBy implements PipeTransform {
             return <any>new Date(a.date) - <any>new Date(b.date);
           });
           break;
+
+        case "sex":
+          this.sortedPost = posts.sort((a, b) =>
+            a.author.login > b.author.login ? 1 : -1
+          );
+          break;
       }
       return sort.reversed ? this.sortedPost.reverse() : this.sortedPost;
     }

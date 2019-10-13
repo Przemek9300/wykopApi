@@ -31,9 +31,7 @@ export class MikroblogSearchComponent implements OnInit {
       this.store.dispatch(getPost());
     });
   }
-  public sort(sort:Sort){
-    console.log(sort);
-    
+  public sort(sort:Sort){    
     this.store.dispatch(sortBy({key:sort.key, reversed:!sort.reversed}))
   }
 

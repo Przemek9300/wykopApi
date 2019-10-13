@@ -6,11 +6,19 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
-import { ClipboardModule } from 'ngx-clipboard';
-import { SortBy } from './pipes/sortBy';
-import { MaterialModule } from '../material/material.module';
+import { ClipboardModule } from "ngx-clipboard";
+import { SortBy } from "./pipes/sortBy";
+import { MaterialModule } from "../material/material.module";
+import { MikroblogPostComponent } from "./components/mikroblog-post/mikroblog-post.component";
+import { MikroblogPostNotFoundComponent } from "./components/mikroblog-post-not-found/mikroblog-post-not-found.component";
 @NgModule({
-  declarations: [MikroblogListComponent, MikroblogSearchComponent, SortBy],
+  declarations: [
+    MikroblogListComponent,
+    MikroblogSearchComponent,
+    MikroblogPostComponent,
+    MikroblogPostNotFoundComponent,
+    SortBy
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -20,6 +28,11 @@ import { MaterialModule } from '../material/material.module';
     MatInputModule,
     ClipboardModule
   ],
-  exports: [MikroblogListComponent, MikroblogSearchComponent]
+  exports: [
+    MikroblogListComponent,
+    MikroblogSearchComponent,
+    MikroblogPostComponent,
+    MikroblogPostNotFoundComponent
+  ]
 })
 export class MikroblogModule {}

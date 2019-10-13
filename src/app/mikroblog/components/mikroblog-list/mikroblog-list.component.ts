@@ -4,13 +4,15 @@ import {
   getPosts,
   Sort,
   getSorter,
+  isLoading,
+  isEmptyQuery
 } from "../../../store/reducer";
 import { Store } from "@ngrx/store";
 
-import {
-  nextPage,
-  getPost
-} from "../../../store/actions";
+import { nextPage, getPost } from "../../../store/actions";
+import { Post } from "src/app/store/model";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: "app-mikroblog-list",
@@ -18,14 +20,12 @@ import {
   styleUrls: ["./mikroblog-list.component.scss"]
 })
 export class MikroblogListComponent implements OnInit {
-  private data;
-  private sort: Sort
-  constructor(
-    private store: Store<WykopState>,
-  ) {}
+  private data: Post[];
+  private sort: Sort;
+  constructor(private store: Store<WykopState>) {}
   ngOnInit(): void {
-    this.data = this.store.select(getPosts);
-    this.store.select(getSorter).subscribe(sort=>this.sort = sort)
+    this.store.select(getPosts).subscribe(data => (this.data = data));
+    this.store.select(getSorter).subscribe(sort => (this.sort = sort));
     this.store.dispatch(getPost());
   }
   public onScroll() {

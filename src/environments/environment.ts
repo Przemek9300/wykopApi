@@ -5,10 +5,10 @@
 export const environment = {
   production: false,
   wykop: 'https://a2.wykop.pl/Tags/Entries/',
-  key: 'FyHF0ZbuVZ',
-  secret: 'eKAbTv2Qjl'
-  //   key: 'GgAFGr5yGl',
-  // secret: '2LGjPnMp7y'
+  // key: 'FyHF0ZbuVZ',
+  // secret: 'eKAbTv2Qjl'
+    key: 'GgAFGr5yGl',
+  secret: '2LGjPnMp7y'
 };
   
 /*

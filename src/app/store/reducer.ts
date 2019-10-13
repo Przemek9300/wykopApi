@@ -37,7 +37,9 @@ export const initialState: WykopState = {
   sortBy: [
     { key: "author", enabled: false, reversed: false },
     { key: "vote", enabled: false, reversed: false },
-    { key: "date", enabled: false, reversed: false }
+    { key: "date", enabled: false, reversed: false },
+    { key: "sex", enabled: false, reversed: false }
+
   ]
 };
 
@@ -46,6 +48,10 @@ export const selectFeature = createFeatureSelector<WykopState>("wykop");
 export const getPosts = createSelector(
   selectFeature,
   state => [...state.posts]
+);
+export const isEmptyPost= createSelector(
+  selectFeature,
+  state => state.posts.length === 0?  true : false
 );
 export const isLoading = createSelector(
   selectFeature,
@@ -58,6 +64,10 @@ export const getPage = createSelector(
 export const getQuery = createSelector(
   selectFeature,
   state => state.query
+);
+export const isEmptyQuery = createSelector(
+  selectFeature,
+  state => (state.query === "" ? true : false)
 );
 
 export const getSorter = createSelector(
@@ -111,13 +121,15 @@ const wykopReducer = createReducer(
   })),
   on(sortBy, (state, data) => ({
     ...state,
-    sortBy: [...state.sortBy.map(el => {
-      if (el.key === data.key) {
-        el.enabled = true;
-        el.reversed = data.reversed;
-      } else el.enabled = false;
-      return el;
-    })]
+    sortBy: [
+      ...state.sortBy.map(el => {
+        if (el.key === data.key) {
+          el.enabled = true;
+          el.reversed = data.reversed;
+        } else el.enabled = false;
+        return el;
+      })
+    ]
   }))
 );
 

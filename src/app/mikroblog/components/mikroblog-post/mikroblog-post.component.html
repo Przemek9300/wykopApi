@@ -1,0 +1,21 @@
+<mat-card class="card">
+  <mat-card-header>
+    <img mat-card-avatar src="{{post.author.avatar}}" class="example-header-image" />
+    <mat-card-title
+      [ngClass]="{'pinky': post.author.sex === 'female','blue': post.author.sex === 'male', 'neutral': !post.author.sex}">
+      {{post.author.login}}</mat-card-title>
+    <mat-card-subtitle>
+      <mat-icon class="icon" matBadgeColor="primary"  color matBadge="{{post.vote_count}}" matBadgeColor="warn"> add_circle</mat-icon>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img *ngIf="post?.embed?.url" class="image-reponsive" mat-card-image src="{{ post?.embed?.url }}" alt="">
+  <mat-card-content>
+    <p>
+      {{post.body}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button>LIKE</button>
+    <button mat-stroked-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>

@@ -14,7 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { MikroblogModule } from './mikroblog/mikroblog.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MikroblogPostNotFoundComponent } from './mikroblog/components/mikroblog-post-not-found/mikroblog-post-not-found.component';
+  
 @NgModule({
   declarations: [AppComponent],
   imports: [
