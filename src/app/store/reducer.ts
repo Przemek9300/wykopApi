@@ -5,19 +5,47 @@ import {
   createSelector,
   createFeatureSelector
 } from "@ngrx/store";
-import { getPost, getPostSuccess, getPostFail, clearPosts, nextPage, resetPage } from "./actions";
-import { Datum } from "./model";
+import {
+  getPost,
+  getPostSuccess,
+  getPostFail,
+  clearPosts,
+  nextPage,
+  resetPage,
+  setQuery,
+  sortBy
+} from "./actions";
+import { Post } from "./model";
+import { element } from "protractor";
+export interface Sort {
+  key: string;
+  enabled: boolean;
+  reversed: boolean;
+}
 export interface WykopState {
   page: number;
-  posts: Datum[];
+  query: string;
+  posts: Post[];
   loading: boolean;
+  sortBy: Sort[];
 }
+export const initialState: WykopState = {
+  page: 1,
+  posts: [],
+  loading: false,
+  query: "",
+  sortBy: [
+    { key: "author", enabled: false, reversed: false },
+    { key: "vote", enabled: false, reversed: false },
+    { key: "date", enabled: false, reversed: false }
+  ]
+};
 
 export const selectFeature = createFeatureSelector<WykopState>("wykop");
 
 export const getPosts = createSelector(
   selectFeature,
-  state => state.posts
+  state => [...state.posts]
 );
 export const isLoading = createSelector(
   selectFeature,
@@ -27,11 +55,30 @@ export const getPage = createSelector(
   selectFeature,
   state => state.page
 );
-export const initialState: WykopState = {
-  page: 1,
-  posts: [],
-  loading: false
-};
+export const getQuery = createSelector(
+  selectFeature,
+  state => state.query
+);
+
+export const getSorter = createSelector(
+  selectFeature,
+  state => state.sortBy.filter(el => el.enabled === true)[0]
+);
+
+export const getSorterList = createSelector(
+  selectFeature,
+  state => state.sortBy
+);
+export const getQueryAndPage = createSelector(
+  getPage,
+  getQuery,
+  (page, query) => {
+    return {
+      query: query,
+      page: page
+    };
+  }
+);
 
 const wykopReducer = createReducer(
   initialState,
@@ -44,20 +91,33 @@ const wykopReducer = createReducer(
   on(getPostFail, state => ({
     ...state,
     posts: [],
-
     loading: false
   })),
   on(clearPosts, state => ({
     ...state,
     posts: []
   })),
-  on(nextPage, state=>({
+  on(nextPage, state => ({
     ...state,
-    page: state.page+1
+    page: state.page + 1
   })),
-  on(resetPage, state=>({
+  on(resetPage, state => ({
     ...state,
     page: 1
+  })),
+  on(setQuery, (state, data) => ({
+    ...state,
+    query: data.query
+  })),
+  on(sortBy, (state, data) => ({
+    ...state,
+    sortBy: [...state.sortBy.map(el => {
+      if (el.key === data.key) {
+        el.enabled = true;
+        el.reversed = data.reversed;
+      } else el.enabled = false;
+      return el;
+    })]
   }))
 );
 

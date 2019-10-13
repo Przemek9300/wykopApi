@@ -1,0 +1,16 @@
+
+.grid {
+    display: grid;
+    margin-top: 100px;
+    align-items: center;
+    justify-items: center; /* adjusted */
+  }
+  
+li{
+    list-style-type: none;
+}
+.card{
+    max-width: 800px;
+    min-width: 800px;
+    margin: 20px;
+}

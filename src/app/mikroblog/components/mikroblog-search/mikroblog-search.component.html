@@ -1,0 +1,12 @@
+<div class="fixed">
+  <mat-form-field class="form">
+    <input matInput placeholder="Favorite food" [value]="query" [formControl]="queryControl">
+  </mat-form-field>
+
+  <ng-container *ngFor="let item of sortList">
+    <button  mat-stroked-button  (click)="sort(item)">Sort by {{item.key}}</button>
+
+  </ng-container>
+  
+
+</div>

@@ -17,7 +17,7 @@
     size: string;
   }
 
-  export interface Datum {
+  export interface Post { 
     id: number;
     date: string;
     body: string;
@@ -54,7 +54,7 @@
   }
 
   export interface RootObject {
-    data: Datum[];
+    data: Post[];
     pagination: Pagination;
     meta: Meta;
   }

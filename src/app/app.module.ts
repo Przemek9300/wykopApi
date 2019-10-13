@@ -7,29 +7,31 @@ import { StoreModule } from "@ngrx/store";
 import { reducer } from "./store/reducer";
 import { environment } from "src/environments/environment";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import { EffectsModule } from '@ngrx/effects';
 import { WykopEffects } from './store/effects';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { MikroblogModule } from './mikroblog/mikroblog.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     NgxSpinnerModule,
-    InfiniteScrollModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MikroblogModule,
     StoreModule.forRoot({wykop:reducer}),
     EffectsModule.forRoot([WykopEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
