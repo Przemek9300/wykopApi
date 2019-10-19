@@ -24,7 +24,10 @@ export class MikroblogListComponent implements OnInit {
   private sort: Sort;
   constructor(private store: Store<WykopState>) {}
   ngOnInit(): void {
-    this.store.select(getPosts).subscribe(data => (this.data = data));
+    this.store.select(getPosts).subscribe(data => (this.data = data.map(el=>{
+      el.tags = el.body.split(' ').filter(x=>x.startsWith('#'))
+      return el;
+    })));
     this.store.select(getSorter).subscribe(sort => (this.sort = sort));
     this.store.dispatch(getPost());
   }

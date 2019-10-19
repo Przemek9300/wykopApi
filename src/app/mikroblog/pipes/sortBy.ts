@@ -27,7 +27,7 @@ export class SortBy implements PipeTransform {
 
         case "sex":
           this.sortedPost = posts.sort((a, b) =>
-            a.author.login > b.author.login ? 1 : -1
+            a.author.sex > b.author.sex ? 1 : -1
           );
           break;
       }

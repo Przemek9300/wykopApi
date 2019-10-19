@@ -3,6 +3,10 @@
     <input matInput placeholder="Fraza do wyszukania" [value]="query" [formControl]="queryControl">
   </mat-form-field>
 
+
+
+
+  
   <ng-container *ngFor="let item of sortList">
     <button  mat-stroked-button  (click)="sort(item)">Sort by {{item.key}}</button>
 

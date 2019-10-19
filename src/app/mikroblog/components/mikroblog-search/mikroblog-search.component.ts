@@ -9,7 +9,12 @@ import {
   sortBy
 } from "../../../store/actions";
 import { Store } from "@ngrx/store";
-import { WykopState, Sort, getSorterList } from "../../../store/reducer";
+import {
+  WykopState,
+  Sort,
+  getSorterList,
+  getQuery
+} from "../../../store/reducer";
 
 @Component({
   selector: "app-mikroblog-search",
@@ -19,11 +24,12 @@ import { WykopState, Sort, getSorterList } from "../../../store/reducer";
 export class MikroblogSearchComponent implements OnInit {
   queryControl = new FormControl("");
   query = "";
-  sortList: Sort []
+  sortList: Sort[];
   constructor(private store: Store<WykopState>) {}
 
   ngOnInit() {
-    this.store.select(getSorterList).subscribe(list=>this.sortList = list)
+    this.store.select(getSorterList).subscribe(list => (this.sortList = list));
+    this.store.select(getQuery).subscribe(query => (this.query = query));
     this.queryControl.valueChanges.pipe(debounceTime(1000)).subscribe(query => {
       this.store.dispatch(clearPosts());
       this.store.dispatch(resetPage());
@@ -31,8 +37,7 @@ export class MikroblogSearchComponent implements OnInit {
       this.store.dispatch(getPost());
     });
   }
-  public sort(sort:Sort){    
-    this.store.dispatch(sortBy({key:sort.key, reversed:!sort.reversed}))
+  public sort(sort: Sort) {
+    this.store.dispatch(sortBy({ key: sort.key, reversed: !sort.reversed }));
   }
-
 }

@@ -1,8 +1,8 @@
 .card{
-    max-width: 800px;
-    min-width: 800px;
+    max-width: 900px;
+    min-width: 900px;
     margin: 20px;
-    background-color: #1c1c1c;
+    background-color: #2C2C2C;
 }
 p{
     color: #cacecf
@@ -32,4 +32,8 @@ button{
 }
 .border-green{
 
+}
+.tag{
+    color: rgba(70, 171, 242, 1);
+    cursor: pointer;
 }

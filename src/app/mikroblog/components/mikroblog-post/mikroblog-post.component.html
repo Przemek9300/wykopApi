@@ -5,14 +5,20 @@
       [ngClass]="{'pinky': post.author.sex === 'female','blue': post.author.sex === 'male', 'neutral': !post.author.sex}">
       {{post.author.login}}</mat-card-title>
     <mat-card-subtitle>
-      <mat-icon class="icon" matBadgeColor="primary"  color matBadge="{{post.vote_count}}" matBadgeColor="warn"> add_circle</mat-icon>
+      <mat-icon class="icon" matBadgeColor="primary" color matBadge="{{post.vote_count}}" matBadgeColor="warn">
+        add_circle</mat-icon>
     </mat-card-subtitle>
   </mat-card-header>
-  <img *ngIf="post?.embed?.url" class="image-reponsive" mat-card-image src="{{ post?.embed?.url }}" alt="">
+  <img *ngIf="post?.embed?.url && post?.embed?.type === 'image'" class="image-reponsive" mat-card-image
+    src="{{ post?.embed?.url }}" alt="">
+
   <mat-card-content>
     <p>
       {{post.body}}
     </p>
+    <ng-container *ngFor="let tag of post.tags">
+      <a class="tag" (click)="tagHandler(tag)">{{tag}} </a>
+    </ng-container>
   </mat-card-content>
   <mat-card-actions>
     <button mat-stroked-button>LIKE</button>

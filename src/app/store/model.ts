@@ -30,6 +30,7 @@
     user_vote: number;
     embed: Embed;
     app: string;
+    tags? : string[]
   }
 
   export interface Pagination {
